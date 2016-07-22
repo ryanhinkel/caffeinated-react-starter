@@ -1,8 +1,8 @@
 { render } = require 'react-dom'
-{ div } = require './elements'
+root = require './components/root'
 
 refresh = (props) ->
-  ui = div({}, props.message)
+  ui = root(props)
   element = document.getElementById 'app'
   render ui, element
 
