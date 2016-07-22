@@ -1,6 +1,6 @@
 { render } = require 'react-dom'
 root = require './components/root'
-createActions = require './actions'
+createActions = require './actions/actions'
 
 # App contains a reference to
 # a global state object and
