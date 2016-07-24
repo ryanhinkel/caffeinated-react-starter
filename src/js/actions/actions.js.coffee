@@ -1,16 +1,14 @@
-assign = require 'lodash/assign'
-
-actions = {
-  setMessage: (store, payload) ->
-    console.log(payload)
-    assign store, { message: payload }
-}
+actionModules = [
+  require('./messageActions') ]
 
 # Export createActions fn
-module.exports = (props, refresh) ->
-  for key, fn of actions
-    actions[key] = (payload) ->
-      props.store = fn(props.store, payload)
-      refresh()
+module.exports = (app, refresh) ->
+  resultActions = {}
+  for { key, initial, actions } in actionModules
+    app.store[key] = initial
+    for key, fn of actions
+      resultActions[key] = (payload) ->
+        app.store = fn(app.store, payload)
+        refresh()
 
-  return actions
+  return resultActions
