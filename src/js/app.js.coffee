@@ -14,6 +14,6 @@ app.refresh = () ->
   element = document.getElementById 'app'
   render ui, element
 
-app.actions = createActions app, app.refresh
+app.actions = createActions(app.store, app.refresh)
 
 app.refresh()

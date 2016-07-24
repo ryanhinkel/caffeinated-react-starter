@@ -2,13 +2,13 @@ actionModules = [
   require('./messageActions') ]
 
 # Export createActions fn
-module.exports = (app, refresh) ->
+module.exports = (store, refresh) ->
   resultActions = {}
   for { key, initial, actions } in actionModules
-    app.store[key] = initial
+    store[key] = initial
     for key, fn of actions
       resultActions[key] = (payload) ->
-        app.store = fn(app.store, payload)
+        store[key] = fn(store[key], payload)
         refresh()
 
   return resultActions
